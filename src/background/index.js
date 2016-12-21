@@ -14,13 +14,10 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
   console.log(details, messagePort);
 
   messagePort && messagePort.postMessage({request: details});
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    console.log(tabs, details);
-    if (tabs[0])
-      chrome.tabs.sendMessage(tabs[0].id, {request: details}, function(response) {
-        console.log('Response', response);
-      });
-  });
+  if (details && details.tabId)
+    chrome.tabs.sendMessage(details.tabId, {request: details}, function(response) {
+      console.log('Response', response);
+    });
 }, {
   urls: ['*://*/*']
 });
