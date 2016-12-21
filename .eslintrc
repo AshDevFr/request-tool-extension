@@ -8,5 +8,11 @@
   },
   "rules": {
     "semi": 2
-  }
+  },
+  "extends": [
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": [
+    "flowtype"
+  ]
 }

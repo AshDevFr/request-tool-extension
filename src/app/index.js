@@ -1,6 +1,8 @@
+/* @flow weak */
 import React, { Component, PropTypes } from 'react';
 import App from './components/app';
 import { render } from 'react-dom';
+import messages from './services/messages';
 
 /* eslint-disable */
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -8,10 +10,13 @@ import { render } from 'react-dom';
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+// $FlowFixMe
 ga('create', 'UA-47272955-4', 'auto');
 ga('set', 'checkProtocolTask', function(){}); // Removes failing protocol check. @see: http://stackoverflow.com/a/22152353/1958200
 ga('require', 'displayfeatures');
 ga('send', 'pageview', 'DevtoolsPanel');
 /* eslint-enable */
+
+messages.init();
 
 render(<App />, document.getElementById('devtools'));
