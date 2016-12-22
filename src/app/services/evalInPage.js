@@ -4,6 +4,7 @@ export default function evalInPage(code: string, cb: Function) {
     chrome.devtools.inspectedWindow.eval(code, cb);
     return;
   }
+
   let result;
   try {
     result = eval(code);

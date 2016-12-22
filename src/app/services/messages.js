@@ -1,15 +1,14 @@
 /* @flow */
 import chromeConsole from './console';
 
-exports.init = function () {
+exports.init = () => {
   console.log('Init message listener');
   let port = chrome.runtime.connect({name:'messagePort'});
-  port.onMessage.addListener(function(message, sender){
+  port.onMessage.addListener((message, sender) => {
     console.log(message, sender);
   });
 
-  chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       console.log('tab request', request);
       if (request) {
         chromeConsole.log('request');
