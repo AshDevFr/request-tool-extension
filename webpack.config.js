@@ -6,6 +6,65 @@ const webpack = require('webpack'),
 const nodeEnv = process.env.NODE_ENV || 'development',
       isProd = nodeEnv === 'production';
 
+const plugins = [
+  new HtmlWebpackPlugin({
+    template: path.resolve(__dirname, 'src/app/index.html'),
+    filename: 'app.html',
+    inject: 'body',
+    chunks: ['app', 'vendors']
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendors',
+    chunks: ['app'],
+    minChunks: Infinity
+  }),
+  new webpack.DefinePlugin({
+    'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
+  }),
+  new CopyWebpackPlugin([
+    {
+      from: path.resolve(__dirname, 'manifest.json')
+    },
+    {
+      from: path.resolve(__dirname, 'src/assets'),
+      to: path.resolve(__dirname, 'dist/assets')
+    },
+    {
+      from: path.resolve(__dirname, 'extension')
+    }
+  ])
+];
+
+if (isProd) {
+  plugins.push(
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        conditionals: true,
+        unused: true,
+        comparisons: true,
+        sequences: true,
+        dead_code: true,
+        evaluate: true,
+        if_return: true,
+        join_vars: true
+      },
+      output: {
+        comments: false
+      }
+    })
+  );
+} else {
+  plugins.push(
+    new webpack.HotModuleReplacementPlugin()
+  );
+}
+
 module.exports = {
   devtool: isProd ? 'hidden-source-map' : 'source-map',
   entry: {
@@ -33,7 +92,7 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           cacheDirectory: true,
-          presets: ['es2015', 'react']
+          presets: [['es2015', {modules: false}], 'stage-0', 'react']
         }
       },
       {
@@ -44,39 +103,10 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src/app/index.html'),
-      filename: 'app.html',
-      inject: 'body',
-      chunks: ['app', 'vendors']
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendors',
-      chunks: ['app'],
-      minChunks: Infinity
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, 'manifest.json')
-      },
-      {
-        from: path.resolve(__dirname, 'src/assets'),
-        to: path.resolve(__dirname, 'dist/assets')
-      },
-      {
-        from: path.resolve(__dirname, 'extension')
-      }
-    ])
-  ],
+  plugins,
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
+    historyApiFallback: true,
     port: 4200,
     compress: isProd,
     inline: !isProd,
@@ -99,4 +129,4 @@ module.exports = {
       poll: true
     }
   }
-}
+};
