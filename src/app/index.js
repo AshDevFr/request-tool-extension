@@ -1,6 +1,6 @@
 /* @flow weak */
 import React, { Component, PropTypes } from 'react';
-import App from './components/app';
+import App from './components/App';
 import { render } from 'react-dom';
 import messages from './services/messages';
 
