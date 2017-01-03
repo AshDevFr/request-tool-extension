@@ -1,13 +1,14 @@
 /* @flow */
 import React from 'react';
-import './MainPanel.less';
 
-export default class MainPanel extends React.Component {
+export default class Help extends React.Component {
   render() {
     return (
       <div>
-
+        Help
       </div>
     );
   }
+
+  static propTypes = {};
 }

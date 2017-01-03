@@ -9,7 +9,7 @@ const nodeEnv = process.env.NODE_ENV || 'development',
 const plugins = [
   new HtmlWebpackPlugin({
     template: path.resolve(__dirname, 'src/app/index.html'),
-    filename: 'app.html',
+    filename: 'index.html',
     inject: 'body',
     chunks: ['app', 'vendors']
   }),
