@@ -1,0 +1,13 @@
+web:
+  build: .
+  dockerfile: Dockerfile_dev
+  command: npm start
+  volumes:
+   - ./extension:/home/workspace/extension
+   - ./src:/home/workspace/src
+   - ./types:/home/workspace/types
+   - ./dist:/home/workspace/dist
+   - ./manifest.json:/home/workspace/manifest.json
+   - ./webpack.config.js:/home/workspace/webpack.config.js
+  ports:
+   - "4200:4200"

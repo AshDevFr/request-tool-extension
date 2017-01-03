@@ -1,0 +1,19 @@
+FROM node:alpine
+MAINTAINER AshDev <ashdevfr@gmail.com>
+
+ENV workdir_path /home/workspace
+WORKDIR ${workdir_path}/
+
+ADD .eslintrc ${workdir_path}
+ADD .flowconfig ${workdir_path}
+ADD package.json ${workdir_path}
+
+RUN npm install -g webpack@beta
+RUN npm install -g webpack-dev-server@beta
+RUN npm install
+
+EXPOSE 4200
+
+VOLUME ${workdir_path}
+
+CMD ["webpack"]
