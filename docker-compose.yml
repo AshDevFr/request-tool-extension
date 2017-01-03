@@ -1,7 +1,7 @@
 web:
   build: .
   dockerfile: Dockerfile_dev
-  command: npm start
+  command: npm run docker
   volumes:
    - ./extension:/home/workspace/extension
    - ./src:/home/workspace/src
