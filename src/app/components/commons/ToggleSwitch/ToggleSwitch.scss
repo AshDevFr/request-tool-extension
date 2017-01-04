@@ -1,0 +1,56 @@
+@import '~bulma/bulma';
+
+.toggle-switch {
+  position: relative;
+  .cmn-toggle {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+    + label {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+    }
+  }
+
+  input.cmn-toggle-round {
+    + label {
+      padding: 2px;
+      width: 40px;
+      height: 20px;
+      background-color: $grey-light;
+      border-radius: 20px;
+      &:before, &:after {
+        display: block;
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        bottom: 1px;
+        content: "";
+      }
+      &:before {
+        right: 1px;
+        background-color: $grey-lighter;
+        border-radius: 20px;
+        transition: background 0.4s;
+      }
+      &:after {
+        width: 19px;
+        background-color: #fff;
+        border-radius: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        transition: margin 0.4s;
+      }
+    }
+    &:checked + label {
+      &:before {
+        background-color: $turquoise;
+      }
+      &:after {
+        margin-left: 20px;
+      }
+    }
+  }
+}

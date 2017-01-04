@@ -1,15 +1,16 @@
 /* @flow */
 import React from 'react';
+import ToggleSwitch from '../../commons/ToggleSwitch/ToggleSwitch.js';
 
 export default class Home extends React.Component {
+  activate(value) {
+    console.log('Activate', value);
+  }
   render() {
     return (
       <div className="home-page">
         <h2>
-          <div className="switch enable">
-            <input id="cmn-toggle-1" className="cmn-toggle cmn-toggle-round" type="checkbox"/>
-            <label htmlFor="cmn-toggle-1"/>
-          </div>
+          <ToggleSwitch className="enable" action={this.activate}/>
           Home
         </h2>
         <hr/>
