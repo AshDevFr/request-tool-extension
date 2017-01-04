@@ -4,7 +4,8 @@ const webpack = require('webpack'),
       CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development',
-      isProd = nodeEnv === 'production';
+      isProd = nodeEnv === 'production',
+      appVersion = require('./package.json').version;
 
 const plugins = [
   new HtmlWebpackPlugin({
@@ -19,7 +20,8 @@ const plugins = [
     minChunks: Infinity
   }),
   new webpack.DefinePlugin({
-    'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
+    'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
+    __APP_VERSION__: JSON.stringify(appVersion)
   }),
   new CopyWebpackPlugin([
     {
@@ -70,7 +72,7 @@ module.exports = {
   entry: {
     app: ['./src/app/index'],
     background : ['./src/background/index'],
-    vendors: ['react', 'react-dom', 'react-redux', 'redux']
+    vendors: ['react', 'react-dom', 'react-redux', 'redux', 'react-router-redux', 'raven-js']
   },
   output: {
     filename: '[name].js',

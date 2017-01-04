@@ -1,7 +1,11 @@
 /* @flow weak */
 import React, { Component, PropTypes } from 'react';
-import App from './components/App';
 import { render } from 'react-dom';
+import Raven from 'raven-js';
+
+import { sentry_url } from './services/sentry';
+import App from './components/App';
+
 import messages from './services/messages';
 
 /* eslint-disable */
@@ -17,6 +21,12 @@ ga('require', 'displayfeatures');
 ga('send', 'pageview', 'DevtoolsPanel');
 /* eslint-enable */
 
+// Raven.config(sentry_url, {
+//   tags: {
+//     appVersion: __APP_VERSION__,
+//     navigator: window.navigator
+//   }
+// }).install();
 // messages.init();
 
 render(<App />, document.getElementById('devtools'));
