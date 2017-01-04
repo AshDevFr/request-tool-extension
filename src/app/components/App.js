@@ -1,6 +1,6 @@
 /* @flow */
-import React, { Component, PropTypes } from 'react';
-import { BrowserRouter, Match, Miss, Link } from 'react-router';
+import React, {Component, PropTypes} from 'react';
+import {BrowserRouter, Match, Miss, Link} from 'react-router';
 import './App.scss';
 
 import Home from './MainPanel/Home/Home';
@@ -13,25 +13,36 @@ export default class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="body-container">
-          <div className="header">
-            <h1>Request tools</h1>
-          </div>
-          <div className="container">
-            <div className="side-panel">
-              <ul>
-                <li><Link activeOnlyWhenExact activeClassName="active" to="/"><span>HOME</span></Link></li>
-                <li><Link activeClassName="active" to="/Rules"><span>RULES</span></Link></li>
-                <li><Link activeClassName="active" to="/Logs"><span>LOGS</span></Link></li>
-                <li><Link activeClassName="active" to="/Help"><span>HELP</span></Link></li>
-              </ul>
+        <div className="main-container">
+          <section className="hero is-primary is-bold header">
+            <div className="hero-body">
+              <div className="container">
+                <h1 className="title">
+                  Request Tools
+                </h1>
+              </div>
             </div>
-            <div className="main-panel">
-              <Match exactly pattern="/" component={Home} />
-              <Match exactly pattern="/rules" component={Rules} />
-              <Match exactly pattern="/logs" component={Logs} />
-              <Match exactly pattern="/help" component={Help} />
-              <Miss component={Home} />
+          </section>
+          <div className="columns">
+            <div className="column is-one-quarter side-panel">
+              <aside className="menu">
+                {/*<p className="menu-label">*/}
+                {/*General*/}
+                {/*</p>*/}
+                <ul className="menu-list">
+                  <li><Link activeOnlyWhenExact activeClassName="is-active" to="/"><span>HOME</span></Link></li>
+                  <li><Link activeClassName="is-active" to="/Rules"><span>RULES</span></Link></li>
+                  <li><Link activeClassName="is-active" to="/Logs"><span>LOGS</span></Link></li>
+                  <li><Link activeClassName="is-active" to="/Help"><span>HELP</span></Link></li>
+                </ul>
+              </aside>
+            </div>
+            <div className="column main-panel content">
+              <Match exactly pattern="/" component={Home}/>
+              <Match exactly pattern="/rules" component={Rules}/>
+              <Match exactly pattern="/logs" component={Logs}/>
+              <Match exactly pattern="/help" component={Help}/>
+              <Miss component={Home}/>
             </div>
           </div>
         </div>

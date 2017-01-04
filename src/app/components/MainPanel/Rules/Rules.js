@@ -5,7 +5,8 @@ export default class Rules extends React.Component {
   render() {
     return (
       <div>
-        Rules
+        <h2>Rules</h2>
+        <hr/>
       </div>
     );
   }

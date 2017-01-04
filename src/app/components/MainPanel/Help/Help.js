@@ -5,7 +5,8 @@ export default class Help extends React.Component {
   render() {
     return (
       <div>
-        Help
+        <h2>Help</h2>
+        <hr/>
       </div>
     );
   }

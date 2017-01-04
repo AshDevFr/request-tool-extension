@@ -5,7 +5,8 @@ export default class Logs extends React.Component {
   render() {
     return (
       <div>
-        Logs
+        <h2>Logs</h2>
+        <hr/>
       </div>
     );
   }
