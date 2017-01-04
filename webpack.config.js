@@ -96,14 +96,20 @@ module.exports = {
         }
       },
       {
-        test: /\.less$/,
+        test: /\.scss$/,
         include: path.resolve(__dirname, 'src'),
         exclude: /node_modules/,
-        loader: 'style-loader!css-loader!less-loader'
+        loader: 'style-loader!css-loader!sass-loader'
       }
     ]
   },
   plugins,
+  resolve: {
+    modules: [
+      'node_modules'
+    ],
+    extensions: ['.js', '.scss'],
+  },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     historyApiFallback: true,

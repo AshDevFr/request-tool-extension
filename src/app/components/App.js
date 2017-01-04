@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
 import { BrowserRouter, Match, Miss, Link } from 'react-router';
-import './App.less';
+import './App.scss';
 
 import Home from './MainPanel/Home/Home';
 import Rules from './MainPanel/Rules/Rules';

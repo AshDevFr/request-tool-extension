@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import App from './components/App';
 import { render } from 'react-dom';
-// import messages from './services/messages';
+import messages from './services/messages';
 
 /* eslint-disable */
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
