@@ -6,6 +6,7 @@ web:
    - ./extension:/home/workspace/extension
    - ./src:/home/workspace/src
    - ./types:/home/workspace/types
+   - ./config:/home/workspace/config
    - ./dist:/home/workspace/dist
    - ./manifest.json:/home/workspace/manifest.json
    - ./webpack.config.js:/home/workspace/webpack.config.js
