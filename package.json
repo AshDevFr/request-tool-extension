@@ -41,7 +41,9 @@
   "scripts": {
     "start": "webpack-dev-server --progress --colors",
     "docker": "webpack-dev-server --host 0.0.0.0 --progress --colors",
-    "build": "NODE_ENV=production webpack --progress --colors --display-error-details",
+    "build": "webpack --progress --colors --display-error-details",
+    "build:watch": "webpack --progress --colors --display-error-details --watch",
+    "build:prod": "NODE_ENV=production webpack --progress --colors --display-error-details",
     "test": "mocha -w config/test.js src/**/*.spec.js",
     "dev:hot": "webpack-dev-server --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./"
   },

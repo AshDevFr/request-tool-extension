@@ -3,7 +3,7 @@ import React from 'react';
 import './ToggleSwitch.scss';
 
 export default class ToggleSwitch extends React.Component {
-  handleClick = e => {
+  handleClick = (e: Object) => {
     this.props.action && this.props.action(e.target.checked);
   };
 

@@ -4,9 +4,10 @@ import { render } from 'react-dom';
 import Raven from 'raven-js';
 
 import { sentry_url } from './services/sentry';
+import { getTabInfos } from './services/tabInfos';
 import App from './components/App';
 
-import messages from './services/messages';
+import * as messages from './services/messages';
 
 /* eslint-disable */
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -21,12 +22,20 @@ ga('require', 'displayfeatures');
 ga('send', 'pageview', 'DevtoolsPanel');
 /* eslint-enable */
 
-// Raven.config(sentry_url, {
-//   tags: {
-//     appVersion: __APP_VERSION__,
-//     navigator: window.navigator
-//   }
-// }).install();
-// messages.init();
+if (process.env.NODE_ENV === 'production') {
+  Raven.config(sentry_url, {
+    tags: {
+      // $FlowFixMe
+      appVersion: __APP_VERSION__,
+      navigator: window.navigator
+    }
+  }).install();
+}
+
+if (chrome.devtools) {
+  messages.init();
+  getTabInfos();
+  console.log('chrome.devtools.inspectedWindow', chrome.devtools.inspectedWindow);
+}
 
 render(<App />, document.getElementById('devtools'));

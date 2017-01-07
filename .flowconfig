@@ -4,6 +4,9 @@
 
 [libs]
 
-types/
+config/types/
 
 [options]
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/config/flow/CSSModule.js.flow'
+module.name_mapper.extension='png' -> '<PROJECT_ROOT>/config/flow/WebpackAsset.js.flow'
+module.name_mapper.extension='jpg' -> '<PROJECT_ROOT>/config/flow/WebpackAsset.js.flow'
