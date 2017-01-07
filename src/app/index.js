@@ -35,7 +35,6 @@ if (process.env.NODE_ENV === 'production') {
 if (chrome.devtools) {
   messages.init();
   getTabInfos();
-  console.log('chrome.devtools.inspectedWindow', chrome.devtools.inspectedWindow);
 }
 
 render(<App />, document.getElementById('devtools'));

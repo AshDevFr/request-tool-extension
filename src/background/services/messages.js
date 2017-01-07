@@ -1,57 +1,45 @@
 /* @flow */
-import { getTabInfos } from './tabInfos';
+import {getTabInfos} from './tabInfos';
 
-let messagePort = {};
+let connections = {};
 
 function handleMessage(message, sender, sendResponse) {
-  sendResponse = sendResponse || ((msg) => {
-    console.log('sendResponse', message.tabId);
-    chrome.tabs.sendMessage(message.tabId, msg);
-  });
-  console.log(message, sender, sendResponse);
   switch (message.type) {
+    case 'INIT_CONNECTION':
+      connections[message.tabId] = sender;
+      break;
     case 'GET_TAB_INFOS':
       getTabInfos(message.tabId).then(tabinfos => {
-        console.log({
-          processId: message.processId,
-          type: 'MESSAGE_RESPONSE',
-          data: tabinfos
-        });
-        sendResponse({
+        sendResponse && sendResponse({
           processId: message.processId,
           type: 'MESSAGE_RESPONSE',
           data: tabinfos
         });
       });
+      return true;
   }
-  return true;
 }
 
 export function init() {
+  chrome.runtime.onMessage.addListener(handleMessage);
   chrome.runtime.onConnect.addListener(port => {
-    messagePort = port;
-    messagePort.onMessage.addListener(handleMessage);
-    messagePort.onDisconnect.addListener(() => {
-      messagePort.onMessage.removeListener(handleMessage);
-      messagePort = {};
+    if (port.name !== 'requestToolMessagePort')
+      return;
+
+    port.onMessage.addListener(handleMessage);
+    port.onDisconnect.addListener(() => {
+      port.onMessage.removeListener(handleMessage);
+      const tabs = Object.keys(connections);
+      for (let i=0; i < tabs.length; i++) {
+        if (connections[tabs[i]] === port) {
+          delete connections[tabs[i]];
+          break;
+        }
+      }
     });
   });
+}
 
-  // chrome.webRequest.onBeforeRequest.addListener(details => {
-  //   console.log(details, messagePort);
-  //
-  //   messagePort && messagePort.postMessage({
-  //     type: 'REQUEST_LOG',
-  //     data: details
-  //   });
-  //   if (details && details.tabId)
-  //     chrome.tabs.sendMessage(details.tabId, {
-  //       type: 'REQUEST_LOG',
-  //       data: details
-  //     }, response => {
-  //       console.log('Response', response);
-  //     });
-  // }, {
-  //   urls: ['*://*/*']
-  // });
+export function postMessage(tabId: number, message: Object, callback: Function) {
+  connections && connections[tabId] && connections[tabId].postMessage(message, callback);
 }
