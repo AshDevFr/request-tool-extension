@@ -1,5 +1,6 @@
 /* @flow weak */
 import React, { Component, PropTypes } from 'react';
+import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import Raven from 'raven-js';
 

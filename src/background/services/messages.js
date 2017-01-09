@@ -40,6 +40,6 @@ export function init() {
   });
 }
 
-export function postMessage(tabId: number, message: Object, callback: Function) {
+export function postMessage(tabId: number, message: Object, callback: ?Function) {
   connections && connections[tabId] && connections[tabId].postMessage(message, callback);
 }
