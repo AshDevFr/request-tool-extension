@@ -1,0 +1,16 @@
+.domain-from {
+  display: inline-block;
+  margin: 10px;
+
+  span.tag {
+    display: inline-block;
+    float: left;
+    height: 20px;
+    padding: 1px 10px 0 10px;
+    margin-right: 10px;
+  }
+  .toggle-switch {
+    height: 20px;
+    float: left;
+  }
+}

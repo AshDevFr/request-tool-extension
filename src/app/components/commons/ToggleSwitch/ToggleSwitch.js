@@ -14,7 +14,8 @@ export default class ToggleSwitch extends React.Component {
       <div className={classes}>
         <input id={id} className="cmn-toggle cmn-toggle-round"
         type="checkbox"
-        onClick={this.handleClick}/>
+        onClick={this.handleClick}
+        disabled={this.props.disabled}/>
         <label htmlFor={id}/>
       </div>
     );
