@@ -7,6 +7,8 @@ import { sentry_url } from './services/sentry';
 import { getTabInfos } from './services/tabInfos';
 import App from './components/App';
 
+import store, { history } from './store';
+
 import * as messages from './services/messages';
 
 /* eslint-disable */
@@ -37,4 +39,9 @@ if (chrome.devtools) {
   getTabInfos();
 }
 
-render(<App />, document.getElementById('devtools'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('devtools')
+);

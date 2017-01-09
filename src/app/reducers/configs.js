@@ -1,8 +1,8 @@
-import { ENABLE_RULES } from '../actions';
+import { ENABLE_DOMAIN } from '../actions';
 
 export default function configs (state = {}, action){
   switch (action) {
-    case ENABLE_RULES:
+    case ENABLE_DOMAIN:
 
     default:
       return state;
