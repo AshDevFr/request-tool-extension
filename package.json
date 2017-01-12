@@ -35,15 +35,15 @@
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.1",
-    "webpack": "^2.1.0-beta.28",
-    "webpack-dev-server": "^2.1.0-beta.12"
+    "webpack": "^2.2.0-rc.3",
+    "webpack-dev-server": "^2.2.0-rc.0"
   },
   "scripts": {
     "start": "webpack-dev-server --progress --colors",
     "docker": "webpack-dev-server --host 0.0.0.0 --progress --colors",
-    "build": "webpack --progress --colors --display-error-details",
+    "build": "webpack -p --progress --colors --display-error-details",
     "build:watch": "webpack --progress --colors --display-error-details --watch",
-    "build:prod": "NODE_ENV=production webpack --progress --colors --display-error-details",
+    "build:prod": "NODE_ENV=production webpack -p --progress --colors --display-error-details",
     "test": "mocha -w config/test.js src/**/*.spec.js",
     "dev:hot": "webpack-dev-server --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./"
   },
